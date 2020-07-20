@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LOGIN</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+    </head>
+    <body style="background-image:url(/static/images/fon1.jpg)">
+        <br><br><br><br><br>
+        <center>
+        <h1>_____________________________________</h1>
+        <h1> LOGIN</h1>
+        {% block content %}
+        {% endblock %}
+         <form action="login" method="post">
+             {% csrf_token %}
+                <label for="nombre" class="form-label">Username:</label>
+                <input type="text" name="username" placeholder="username"><br><br>
+                <label for="nombre" class="form-label">Password:</label>
+                <input type="password" name="password" placeholder="Password"><br><br>
+                <input type="Submit" >
+         </form>
+         <h1>_____________________________________</h1>
+         <div>
+            {% for message in messages%}
+                <h3> {{message}} </h3>
+            {% endfor %}
+         </div>
+        </center>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <center>
+        <br><br><br><br>
+        
+        <H1>REGISTER</H1>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>USUARIOS</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" type='text/css' href="main.css">
+        <script src="main.js"></script>
+    </head>
+    <body style="background-image:url(/static/images/fon1.jpg)">
+        {% block content %}
+        {% endblock %}
+        <h1>_____________________________________</h1>
+        <form action="register" method="post">
+            {% csrf_token %}
+            <label for="nombre" class="form-label">first_name:</label>
+            <input type="text" name="first_name" placeholder="First Name" ><br><br>
+            <label for="nombre" class="form-label">Last_name:</label>
+            <input type="text" name="last_name" placeholder="Last Name"><br><br>
+            <label for="nombre" class="form-label">Username:</label>
+            <input type="text" name="username" placeholder="Userame"><br><br>
+            <label for="nombre" class="form-label">Email:</label>
+            <input type="email" name="email" placeholder="Email"><br><br>
+            <label for="nombre" class="form-label">Password:</label>
+            <input type="password" name="password1" placeholder="Password"><br><br>
+            <label for="nombre" class="form-label">Confirm Password:</label>
+            <input type="password" name="password2" placeholder="Confirm Password"><br><br>
+            <input type="submit" value="submit">
+        </form>
+        <h1>_____________________________________</h1>
+        <div>
+            {% for message in messages%}
+                <h3> {{message}} </h3>
+            {% endfor %}
+        </div>
+        </center>
+    </body>
+</html>

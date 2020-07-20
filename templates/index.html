@@ -1,4 +1,6 @@
 {% load static %}
+{% static "images" as baseUrl%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,11 +32,11 @@
 							<div class="logo"><a href="index.html">DIEGO</a></div>
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li class="active"><a href="index.html">Home</a></li>
-									<li><a href="about.html">About us</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="news.html">News</a></li>
-									<li><a href="contact.html">Contact</a></li>
+									<li class="active"><a href="index">Home</a></li>
+									<li><a href="crear">Crear</a></li>
+									<li><a href="listado">Lista</a></li>
+									<li><a href="login">Login</a></li>
+									<li><a href="register">Registrar</a></li>
 								</ul>
 							</nav>
 							<div class="header_phone ml-auto">Call us: 973 273 019</div>
@@ -72,7 +74,7 @@
 		<div class="menu_content">
 			<ul>
 				<li><a href="inex.html">Home</a></li>
-				<li><a href="about.html">About us</a></li>
+				<li><a href="crear.html">Crear us</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="news.html">News</a></li>
 				<li><a href="contact.html">Contact</a></li>
