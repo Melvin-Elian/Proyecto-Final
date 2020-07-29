@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-whidth, initial-scale=1.0">
+        <title>Cuadernos-Papeles-Libros</title>
+        
+    </head>
+    <body>
+        <h1>Stock: Mochilas - Loncheras - Tomatodos - Tappers</h1>
+        <table>
+            <head>
+                <tr>
+                    <th>Producto</th>
+                    <th>Imagen</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Oferta</th>
+                </tr>
+            </head>
+            <tbody>
+                {% for mochilas in mochilas %}
+                    <tr>
+                        <td>{{mochilas.name}}</td>
+                        <td>{{mochilas.img}}</td>
+                        <td>{{mochilas.desc}}</td>
+                        <td>{{mochilas.price}}</td>
+                        <td>{{mochilas.offer}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
