@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-whidth, initial-scale=1.0">
+        <title>Cuadernos-Papeles-Libros</title>
+        
+    </head>
+    <body>
+        <h1>Stock: Cuadernos-Papeles-Libros</h1>
+        <table>
+            <head>
+                <tr>
+                    <th>Producto</th>
+                    <th>Imagen</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Oferta</th>
+                </tr>
+            </head>
+            <tbody>
+                {% for cuadernos in cuadernos %}
+                    <tr>
+                        <td>{{cuadernos.name}}</td>
+                        <td>{{cuadernos.img}}</td>
+                        <td>{{cuadernos.desc}}</td>
+                        <td>{{cuadernos.price}}</td>
+                        <td>{{cuadernos.offer}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
