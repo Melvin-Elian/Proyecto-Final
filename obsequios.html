@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-whidth, initial-scale=1.0">
+        <title>Obsequios</title>
+        
+    </head>
+    <body>
+        <h1>Stock: Obsequios - Peluches</h1>
+        <table>
+            <head>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripcion</th>
+                    <th>Color</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </head>
+            <tbody>
+                {% for obsequios in obsequios %}
+                    <tr>
+                        <td>{{obsequios.name}}</td>
+                        <td>{{obsequios.desc}}</td>
+                        <td>{{obsequios.color}}</td>
+                        <td>{{obsequios.price}}</td>
+                        <td>{{obsequios.cant}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
