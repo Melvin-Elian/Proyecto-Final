@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-whidth, initial-scale=1.0">
+        <title>Piñateria</title>
+        
+    </head>
+    <body>
+        <h1>Stock: Piñateria</h1>
+        <table>
+            <head>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripcion</th>
+                    <th>Color</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </head>
+            <tbody>
+                {% for piñateria in piñateria %}
+                    <tr>
+                        <td>{{piñateria.name}}</td>
+                        <td>{{piñateria.desc}}</td>
+                        <td>{{piñateria.color}}</td>
+                        <td>{{piñateria.price}}</td>
+                        <td>{{piñateria.cant}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
