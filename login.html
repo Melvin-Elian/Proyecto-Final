@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LOGIN</title>
+    </head>
+    <body bgcolor="orange">
+        <br><br><br><br><br>
+        <center>
+        <h1>LOGIN</h1>
+       
+         <form action="login" method="post">
+             {% csrf_token %}
+                <label for="nombre" class="form-label">Username:</label>
+                <input type="text" name="username" placeholder="username"><br><br>
+                <label for="nombre" class="form-label">Password:</label>
+                <input type="password" name="password1" placeholder="Password"><br><br>
+                <input type="Submit" >
+         </form>
+         
+        </center>
+    </body>
+</html>
