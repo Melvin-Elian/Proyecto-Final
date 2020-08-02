@@ -1,22 +1,30 @@
+{% load static %}
+{% static "images" as baseUrl%}
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset='utf-8'>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>LOGIN</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+
     </head>
-    <body bgcolor="orange">
+    <body style="background-image:url(/static/images/login.jpg)">
         <br><br><br><br><br>
         <center>
-        <h1>LOGIN</h1>
-       
+        <h1>LIBRERIA DIEGO</h1>
+        <br><br>
          <form action="login" method="post">
              {% csrf_token %}
-                <label for="nombre" class="form-label">Username:</label>
-                <input type="text" name="username" placeholder="username"><br><br>
-                <label for="nombre" class="form-label">Password:</label>
-                <input type="password" name="password1" placeholder="Password"><br><br>
-                <input type="Submit" >
+                <table>
+                <label for="nombre"  class="form-label"><h4>Username: </h4> </label>
+                <input type="text" size="50" name="username" style="font-size:18pt;height:40px;width:350px;" ><br><br>
+                <label for="nombre" class="form-label"> <h4>Password: </h4></label>
+                <input type="password" name="password1"  style="font-size:18pt;height:40px;width:350px;"><br><br>
+                <input type="Submit" style="font-size:18pt;height:40px;width:95px;">
+                </table>
          </form>
          
         </center>
