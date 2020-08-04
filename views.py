@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Productos, Cuadernos, Lapices, Mochilas, Juguetes, Obsequios, Piñateria
-from .forms import ProductosForm,LapicesForm,JuguetesForm, MochilasForm
+from .forms import ProductosForm,LapicesForm,JuguetesForm, MochilasForm, PiñateriaForm,  ObsequiosForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, auth
@@ -153,21 +153,21 @@ def crearLapices(request):
             form.save()
             return redirect('lapices')
     return render(request, 'crearLapices.html', contexto)
-def crearLapices(request):
+def crearPiñateria(request):
     if request.method == 'GET':
-        form = LapicesForm()
+        form = PiñateriaForm()
         contexto ={
             'form':form
         }
     else:
-        form= LapicesForm(request.POST)
+        form= PiñateriaForm(request.POST)
         contexto ={
             'form':form
         }
         if form.is_valid():
             form.save()
-            return redirect('lapices')
-    return render(request, 'crearLapices.html', contexto)
+            return redirect('piñateria')
+    return render(request, 'crearPiñateria.html', contexto)
 def crearMochilas(request):
     if request.method == 'GET':
         form = MochilasForm()
@@ -183,3 +183,33 @@ def crearMochilas(request):
             form.save()
             return redirect('mochilas')
     return render(request, 'crearMochilas.html', contexto)
+def crearObsequios(request):
+    if request.method == 'GET':
+        form = ObsequiosForm()
+        contexto ={
+            'form':form
+        }
+    else:
+        form= ObsequiosForm(request.POST)
+        contexto ={
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('obsequios')
+    return render(request, 'crearObsequios.html', contexto)
+def crearJuguetes(request):
+    if request.method == 'GET':
+        form = JuguetesForm()
+        contexto ={
+            'form':form
+        }
+    else:
+        form= JuguetesForm(request.POST)
+        contexto ={
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('juguetes')
+    return render(request, 'crearJuguetes.html', contexto)
