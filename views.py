@@ -1,19 +1,26 @@
 from django.shortcuts import render, redirect
 from .models import Productos, Cuadernos, Lapices, Mochilas, Juguetes, Obsequios, Piñateria
-from .forms import ProductosForm
+from .forms import ProductosForm,LapicesForm,JuguetesForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, auth
+from django.views.generic import View
+from .utils import render_to_pdf
+from django.template.loader import get_template
+from .forms import CuadernosForm
 #import pdfkit
 from django.http import HttpResponse
 from io import  BytesIO
 import os
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4, C0
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab. platypus import Paragraph, Table, Table, Image
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab. platypus import Paragraph, Table, TableStyle, Image, SimpleDocTemplate, Spacer
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib import colors
 this_path =os.getcwd()+'/polls/'
+#porfssvor
+from reportlab.lib.units import inch,mm
 
 # Create your views here.
 def home(request):
@@ -58,34 +65,92 @@ def juguetes(request):
         'juguetes':juguetes
     }
     return render(request,"juguetes.html",contexto)
-def login(request):
-    if request.method=='POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(username= username, password= password)
-        if user is not None:
-            auth.login(request, user)
-            return redirect('login')
-        else:
-            messages.info(request,'Datos incorrectos')
-            return redirect('login')
-    else:
-        return render(request,'login.html')
+
 def report(request):
         response = HttpResponse(content_type='application/pdf')
-        response ['Content-Disposition']='attachment; filename= Diego-Inventario-report.pdf'
+        #response ['Content-Disposition']='attachment; filename= Diego-Inventario-report.pdf'
         buffer = BytesIO()
-        pdf = canvas.Canvas(buffer)
+        c = canvas.Canvas(buffer, pagesize=A4)
         #CABECERA
-        pdf.setFont("Helvetica", 24)
-        pdf.drawString(180, 780, u"--LIBRERIA DIEGO--")
-        pdf.setFont("Helvetica", 9)
-        pdf.drawString(250, 760, u"REPORTE DE ALMACEN")
+        c.setLineWidth(.3)
+        c.setFont("Helvetica", 24)
+        c.drawString(200, 780, "LIBRERIA DIEGO")
+        c.setFont("Helvetica", 9)
+        c.drawString(250, 760, "REPORTE DE ALMACEN")
+        c.line(30,747,570,747)
         #CUERPO
 
+        cuadernos= Cuadernos.objects.all()
+        contexto ={
+            'cuadernos':cuadernos
+        }
 
-        pdf.save()
+        c.save()
         pdf = buffer.getvalue()
         buffer.close()
         response.write(pdf)
         return response
+class GeneratePDF(View):
+    def get(self, request, *args, **kwargs):
+        template= get_template('cuadernos.html')
+        context= {
+            "invoce_id": 123,
+            "customer_name": "Jhon Cooper",
+            "amount": 1299.99,
+            "today":"Today",
+        }
+        html=template.render(context)
+        pdf=render_to_pdf('cuadernos.html',context)
+        if pdf:
+            response=HttpResponse(pdf,content_type='application/pdf')
+            filename= "Invoice_%s.pdf"%{"12341231"}
+            content= "inline; filename='%s'"%{filename}
+            dowland= request.GET.get("dowland")
+            if dowland:
+                content="attachment; filename='%s'"%{filename}
+            response['Content-Disposition']=content
+            return response
+        return HttpResponse("Not found")
+def loginPage(request):
+    if request.method =='POST':
+        username= request.POST.get('username')
+        password= request.POST.get('password')
+        user= authenticate(request, username=username, password=password)
+        if user is None:
+            return redirect('home')
+        else:
+            login(request,user)
+            return redirect('login')
+    context={}
+    return render(request,'login.html',context)
+def crearCuadernos(request):
+    if request.method == 'GET':
+        form = CuadernosForm()
+        contexto ={
+            'form':form
+        }
+    else:
+        form= CuadernosForm(request.POST)
+        contexto ={
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('cuadernos')
+    return render(request, 'crearCuadernos.html', contexto)
+def crearLapices(request):
+    if request.method == 'GET':
+        form = LapicesForm()
+        contexto ={
+            'form':form
+        }
+    else:
+        form= LapicesForm(request.POST)
+        contexto ={
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('lapices')
+    return render(request, 'crearLapices.html', contexto)
+                
