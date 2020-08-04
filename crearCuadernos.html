@@ -1,0 +1,11 @@
+{% extends 'cuadernos.html' %}
+{%block titulo%} Crear-Cuadernos{%endblock titulo%}
+{%block cuerpo%}
+<form method="post">
+    <br><br>
+    {% csrf_token %}
+    {{form.as_p}}
+
+<button type="submit">CREAR</button>
+</form>
+{%endblock cuerpo%}
