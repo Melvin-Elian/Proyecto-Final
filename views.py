@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Productos, Cuadernos, Lapices, Mochilas, Juguetes, Obsequios, Piñateria
-from .forms import ProductosForm,LapicesForm,JuguetesForm
+from .forms import ProductosForm,LapicesForm,JuguetesForm, MochilasForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, auth
@@ -153,4 +153,33 @@ def crearLapices(request):
             form.save()
             return redirect('lapices')
     return render(request, 'crearLapices.html', contexto)
-                
+def crearLapices(request):
+    if request.method == 'GET':
+        form = LapicesForm()
+        contexto ={
+            'form':form
+        }
+    else:
+        form= LapicesForm(request.POST)
+        contexto ={
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('lapices')
+    return render(request, 'crearLapices.html', contexto)
+def crearMochilas(request):
+    if request.method == 'GET':
+        form = MochilasForm()
+        contexto ={
+            'form':form
+        }
+    else:
+        form= MochilasForm(request.POST)
+        contexto ={
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('mochilas')
+    return render(request, 'crearMochilas.html', contexto)
