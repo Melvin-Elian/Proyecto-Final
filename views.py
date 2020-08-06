@@ -274,6 +274,10 @@ def eliminarCuadernos (request, id):
     cuadernos= Cuadernos.objects.get(id=id)
     cuadernos.delete()
     return render(request, 'cuadernos.html', contexto)
+def eliminarLapices (request, id):
+    lapices= Lapices.objects.get(id=id)
+    lapices.delete()
+    return render(request, 'lapices.html', contexto)
 #REPORTES
 def reporteCuadernos (request) :
     cuadernos = Cuadernos.objects.all()
