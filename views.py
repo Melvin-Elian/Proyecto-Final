@@ -292,3 +292,19 @@ def editarCuadernos (request, id):
             form.save()
             return redirect('cuadernos')
     return render(request, 'crearCuadernos.html', contexto)
+def editarLapices (request, id):
+    lapices= Lapices.objects.get(id=id)
+    if request.method == 'GET':
+        form= LapicesForm(instance= lapices)
+        contexto = {
+            'form': form
+        }
+    else :
+        form= LapicesForm(request.POST, instance= lapices)
+        contexto = {
+            'form': form
+        }
+        if form.is_valid() :
+            form.save()
+            return redirect('lapices')
+    return render(request, 'crearLapices.html', contexto)
