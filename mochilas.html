@@ -75,6 +75,7 @@
                     <th>Color</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Opcion</th>
                 </tr>
             </head>
             <tbody>
@@ -85,11 +86,12 @@
                         <td>{{mochilas.color}}</td>
                         <td>{{mochilas.price}}</td>
                         <td>{{mochilas.cant}}</td>
+                        <td> <a href=" {% url 'editarMochilas' mochilas.id %} ">EDITAR</a> <a href=" {% url 'eliminarMochilas' mochilas.id %}">ELIMINAR</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <li><a href="crearMochilas">crear Mochilas</a></li>
+        <li><a href="crearMochilas">AGREGAR</a> <a href="reporteMochilas">REPORTE</a></li>
     </center>
     {%endblock cuerpo%} 
     </body>
