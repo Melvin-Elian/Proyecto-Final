@@ -1,0 +1,39 @@
+{% load static %}
+{% static "images" as baseUrl%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-whidth, initial-scale=1.0">
+    </head>
+    <body>
+        <center><h1>LIBRERIA DIEGO</h1></center>
+        <center><h1>REPORTE DE CUADERNOS</h1></center>
+        <h5>Direccion: </h5>
+        <h5>Celular: 973 273 019</h5>
+        <h1>_____________________________________________________________________________________________</h1>
+        <table border="1px">
+            <head>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripcion</th>
+                    <th>Color</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </head>
+            <tbody>
+                {% for cuadernos in cuadernos %}
+                    <tr>
+                        <td>{{cuadernos.name}}</td>
+                        <td>{{cuadernos.desc}}</td>
+                        <td>{{cuadernos.color}}</td>
+                        <td>{{cuadernos.price}}</td>
+                        <td>{{cuadernos.cant}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
