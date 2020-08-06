@@ -320,3 +320,14 @@ def reporteJuguetes (request) :
         return HttpResponse(response.getvalue(), content_type='application/pdf')
     else:
         return HttpResponse('error al generar')
+def reporteObsequios (request) :
+    obsequios = Obsequios.objects.all()
+    data= {'obsequios' : obsequios}
+    template= get_template('reportObsequios.html')
+    data1= template.render(data)
+    response= BytesIO()
+    pdfPage= pisa.pisaDocument(BytesIO(data1.encode('UTF-8')),response)
+    if not pdfPage.err:
+        return HttpResponse(response.getvalue(), content_type='application/pdf')
+    else:
+        return HttpResponse('error al generar')
