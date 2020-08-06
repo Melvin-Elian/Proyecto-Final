@@ -265,10 +265,43 @@ def editarMochilas (request, id):
             form.save()
             return redirect('mochilas')
     return render(request, 'crearMochilas.html', contexto)
-def reportito (request) :
+def reporteCuadernos (request) :
     cuadernos = Cuadernos.objects.all()
     data= {'cuadernos' : cuadernos}
     template= get_template('reportCuadernos.html')
+    data1= template.render(data)
+    response= BytesIO()
+    pdfPage= pisa.pisaDocument(BytesIO(data1.encode('UTF-8')),response)
+    if not pdfPage.err:
+        return HttpResponse(response.getvalue(), content_type='application/pdf')
+    else:
+        return HttpResponse('error al generar')
+def reporteLapices (request) :
+    lapices = Lapices.objects.all()
+    data= {'lapices' : lapices}
+    template= get_template('reportLapices.html')
+    data1= template.render(data)
+    response= BytesIO()
+    pdfPage= pisa.pisaDocument(BytesIO(data1.encode('UTF-8')),response)
+    if not pdfPage.err:
+        return HttpResponse(response.getvalue(), content_type='application/pdf')
+    else:
+        return HttpResponse('error al generar')
+def reporteMochilas (request) :
+    mochilas = Mochilas.objects.all()
+    data= {'mochilas' : mochilas}
+    template= get_template('reportMochilas.html')
+    data1= template.render(data)
+    response= BytesIO()
+    pdfPage= pisa.pisaDocument(BytesIO(data1.encode('UTF-8')),response)
+    if not pdfPage.err:
+        return HttpResponse(response.getvalue(), content_type='application/pdf')
+    else:
+        return HttpResponse('error al generar')
+def reportePiñateria (request) :
+    piñateria = Piñateria.objects.all()
+    data= {'piñateria' : piñateria}
+    template= get_template('reportPiñateria.html')
     data1= template.render(data)
     response= BytesIO()
     pdfPage= pisa.pisaDocument(BytesIO(data1.encode('UTF-8')),response)
