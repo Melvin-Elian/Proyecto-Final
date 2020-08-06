@@ -282,6 +282,10 @@ def eliminarPiñateria (request, id):
     piñateria= Piñateria.objects.get(id=id)
     piñateria.delete()
     return render(request, 'piñateria.html', contexto)
+def eliminarJuguetes (request, id):
+    juguetes= Juguetes.objects.get(id=id)
+    juguetes.delete()
+    return render(request, 'juguetes.html', contexto)
 #REPORTES
 def reporteCuadernos (request) :
     cuadernos = Cuadernos.objects.all()
