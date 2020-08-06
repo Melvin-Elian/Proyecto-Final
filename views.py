@@ -9,6 +9,7 @@ from .utils import render_to_pdf
 from django.template.loader import get_template
 from .forms import CuadernosForm
 import pdfkit
+from xhtml2pdf import pisa 
 from django.http import HttpResponse
 from io import  BytesIO
 import os
@@ -65,52 +66,6 @@ def juguetes(request):
         'juguetes':juguetes
     }
     return render(request,"juguetes.html",contexto)
-
-def report(request):
-        response = HttpResponse(content_type='application/pdf')
-        #response ['Content-Disposition']='attachment; filename= Diego-Inventario-report.pdf'
-        buffer = BytesIO()
-        c = canvas.Canvas(buffer, pagesize=A4)
-        #CABECERA
-        c.setLineWidth(.3)
-        c.setFont("Helvetica", 24)
-        c.drawString(200, 780, "LIBRERIA DIEGO")
-        c.setFont("Helvetica", 9)
-        c.drawString(250, 760, "REPORTE DE ALMACEN")
-        c.line(30,747,570,747)
-        #CUERPO
-
-        cuadernos= Cuadernos.objects.all()
-        contexto ={
-            'cuadernos':cuadernos
-        }
-
-        c.save()
-        pdf = buffer.getvalue()
-        buffer.close()
-        response.write(pdf)
-        return response
-class GeneratePDF(View):
-    def get(self, request, *args, **kwargs):
-        template= get_template('cuadernos.html')
-        context= {
-            "invoce_id": 123,
-            "customer_name": "Jhon Cooper",
-            "amount": 1299.99,
-            "today":"Today",
-        }
-        html=template.render(context)
-        pdf=render_to_pdf('cuadernos.html',context)
-        if pdf:
-            response=HttpResponse(pdf,content_type='application/pdf')
-            filename= "Invoice_%s.pdf"%{"12341231"}
-            content= "inline; filename='%s'"%{filename}
-            dowland= request.GET.get("dowland")
-            if dowland:
-                content="attachment; filename='%s'"%{filename}
-            response['Content-Disposition']=content
-            return response
-        return HttpResponse("Not found")
 def loginPage(request):
     if request.method =='POST':
         username= request.POST.get('username')
@@ -214,20 +169,6 @@ def crearJuguetes(request):
             return redirect('juguetes')
     return render(request, 'crearJuguetes.html', contexto)
 
-def documentpdf(request):
-    from django.template.loader import get_template 
-    from django.template import Context
-    
-    template = get_template("cuadernos.html")
-    context = {"template": template} # data is the context data that is sent to the html file to render the output. 
-    html = template.render(context)  # Renders the template with the context data.
-    pdfkit.from_string(html, 'out.pdf')
-    pdf = open("out.pdf")
-    response = HttpResponse(pdf.read(), content_type='application/pdf')  # Generates the response as pdf response.
-    response['Content-Disposition'] = 'attachment; filename=output.pdf'
-    pdf.close()
-    os.remove("out.pdf")  # remove the locally created pdf file.
-    return response  # returns the response.
 def editarJuguetes (request, id):
     juguetes= Juguetes.objects.get(id=id)
     if request.method == 'GET':
@@ -324,3 +265,14 @@ def editarMochilas (request, id):
             form.save()
             return redirect('mochilas')
     return render(request, 'crearMochilas.html', contexto)
+def reportito (request) :
+    cuadernos = Cuadernos.objects.all()
+    data= {'cuadernos' : cuadernos}
+    template= get_template('reportCuadernos.html')
+    data1= template.render(data)
+    response= BytesIO()
+    pdfPage= pisa.pisaDocument(BytesIO(data1.encode('UTF-8')),response)
+    if not pdfPage.err:
+        return HttpResponse(response.getvalue(), content_type='application/pdf')
+    else:
+        return HttpResponse('error al generar')
