@@ -270,6 +270,10 @@ def eliminarMochilas (request, id):
     mochilas= Mochilas.objects.get(id=id)
     mochilas.delete()
     return render(request, 'mochilas.html', contexto)
+def eliminarCuadernos (request, id):
+    cuadernos= Cuadernos.objects.get(id=id)
+    cuadernos.delete()
+    return render(request, 'cuadernos.html', contexto)
 #REPORTES
 def reporteCuadernos (request) :
     cuadernos = Cuadernos.objects.all()
