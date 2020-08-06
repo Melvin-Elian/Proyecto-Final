@@ -278,6 +278,10 @@ def eliminarLapices (request, id):
     lapices= Lapices.objects.get(id=id)
     lapices.delete()
     return render(request, 'lapices.html', contexto)
+def eliminarPiñateria (request, id):
+    piñateria= Piñateria.objects.get(id=id)
+    piñateria.delete()
+    return render(request, 'piñateria.html', contexto)
 #REPORTES
 def reporteCuadernos (request) :
     cuadernos = Cuadernos.objects.all()
