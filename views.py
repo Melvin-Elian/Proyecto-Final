@@ -265,6 +265,12 @@ def editarMochilas (request, id):
             form.save()
             return redirect('mochilas')
     return render(request, 'crearMochilas.html', contexto)
+#ELIMINAR
+def eliminarMochilas (request, id):
+    mochilas= Mochilas.objects.get(id=id)
+    mochilas.delete()
+    return render(request, 'mochilas.html', contexto)
+#REPORTES
 def reporteCuadernos (request) :
     cuadernos = Cuadernos.objects.all()
     data= {'cuadernos' : cuadernos}
