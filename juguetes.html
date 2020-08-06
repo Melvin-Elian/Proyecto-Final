@@ -86,12 +86,12 @@
                         <td>{{juguetes.color}}</td>
                         <td>{{juguetes.price}}</td>
                         <td>{{juguetes.cant}}</td>
-                        <td> <a href=" {% url 'editarJuguetes' juguetes.id %} ">EDITAR</a> <a href="">ELIMINAR</a></td>
+                        <td> <a href=" {% url 'editarJuguetes' juguetes.id %} ">EDITAR</a> <a href=" {% url 'eliminarMochilas' juguetes.id %}">ELIMINAR</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <li><a href="crearJuguetes">crear Juguetes</a></li>
+        <li><a href="crearJuguetes">AGREGAR</a> <a href="reporteJuguetes">REPORTE</a></li>
     </center>
     {% endblock cuerpo %}
     </body>
