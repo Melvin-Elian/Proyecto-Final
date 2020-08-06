@@ -75,6 +75,7 @@
                     <th>Color</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Opcion</th>
                 </tr>
             </head>
             <tbody>
@@ -85,12 +86,13 @@
                         <td>{{piñateria.color}}</td>
                         <td>{{piñateria.price}}</td>
                         <td>{{piñateria.cant}}</td>
+                        <td> <a href=" {% url 'editarPiñateria' piñateria.id %} ">EDITAR</a> <a href=" {% url 'eliminarPiñateria' piñateria.id %}">ELIMINAR</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </center>
-    <li><a href="crearPiñateria">crear Piñateria</a></li>
+    <li><a href="crearPiñateria">AGREGAR</a> <a href="reportePiñateria">REPORTE</a></li>
+</center>
     {%endblock cuerpo%}
     </body>
 </html>
