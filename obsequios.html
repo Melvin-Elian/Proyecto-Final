@@ -76,6 +76,7 @@
                     <th>Color</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Opcion</th>
                 </tr>
             </head>
             <tbody>
@@ -86,13 +87,12 @@
                         <td>{{obsequios.color}}</td>
                         <td>{{obsequios.price}}</td>
                         <td>{{obsequios.cant}}</td>
+                        <td> <a href=" {% url 'editarObsequios' obsequios.id %} ">EDITAR</a> <a href=" {% url 'eliminarObsequios' obsequios.id %}">ELIMINAR</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-
-        <li><a href="crearObsequios">crear Obsequios</a></li>
+        <li><a href="crearObsequios">AGREGAR</a> <a href="reporteObsequios">REPORTE</a></li>
     </center>
     {% endblock cuerpo %}
     </body>
