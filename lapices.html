@@ -76,6 +76,7 @@
                     <th>Color</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Lapices</th>
                 </tr>
             </head>
             <tbody>
@@ -86,11 +87,12 @@
                         <td>{{lapices.color}}</td>
                         <td>{{lapices.price}}</td>
                         <td>{{lapices.cant}}</td>
+                        <td> <a href=" {% url 'editarLapices' lapices.id %} ">EDITAR</a> <a href=" {% url 'eliminarLapices' lapices.id %}">ELIMINAR</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <li><a href="crearLapices">crear Lapices</a></li>
+        <li><a href="crearLapices">AGREGAR</a> <a href="reporteLapices">REPORTE</a></li>
     </center>
     {%endblock cuerpo%} 
     </body>
