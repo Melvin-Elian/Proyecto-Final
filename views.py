@@ -8,7 +8,7 @@ from django.views.generic import View
 from .utils import render_to_pdf
 from django.template.loader import get_template
 from .forms import CuadernosForm
-#import pdfkit
+import pdfkit
 from django.http import HttpResponse
 from io import  BytesIO
 import os
@@ -18,7 +18,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab. platypus import Paragraph, Table, TableStyle, Image, SimpleDocTemplate, Spacer
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib import colors
-this_path =os.getcwd()+'/polls/'
+
 #porfssvor
 from reportlab.lib.units import inch,mm
 
@@ -40,7 +40,7 @@ def piñateria(request):
     contexto ={
         'piñateria':piñateria
     }
-    return render(request,"obsequios.html",contexto)
+    return render(request,"piñateria.html",contexto)
 def obsequios(request):
     obsequios= Obsequios.objects.all()
     contexto ={
@@ -213,3 +213,50 @@ def crearJuguetes(request):
             form.save()
             return redirect('juguetes')
     return render(request, 'crearJuguetes.html', contexto)
+
+def documentpdf(request):
+    from django.template.loader import get_template 
+    from django.template import Context
+    
+    template = get_template("cuadernos.html")
+    context = {"template": template} # data is the context data that is sent to the html file to render the output. 
+    html = template.render(context)  # Renders the template with the context data.
+    pdfkit.from_string(html, 'out.pdf')
+    pdf = open("out.pdf")
+    response = HttpResponse(pdf.read(), content_type='application/pdf')  # Generates the response as pdf response.
+    response['Content-Disposition'] = 'attachment; filename=output.pdf'
+    pdf.close()
+    os.remove("out.pdf")  # remove the locally created pdf file.
+    return response  # returns the response.
+def editarJuguetes (request, id):
+    juguetes= Juguetes.objects.get(id=id)
+    if request.method == 'GET':
+        form= JuguetesForm(instance= juguetes)
+        contexto = {
+            'form': form
+        }
+    else :
+        form= JuguetesForm(request.POST, instance= juguetes)
+        contexto = {
+            'form': form
+        }
+        if form.is_valid() :
+            form.save()
+            return redirect('juguetes')
+    return render(request, 'crearJuguetes.html', contexto)
+def editarObsequios (request, id):
+    obsequios= Obsequios.objects.get(id=id)
+    if request.method == 'GET':
+        form= ObsequiosForm(instance= obsequios)
+        contexto = {
+            'form': form
+        }
+    else :
+        form= ObsequiosForm(request.POST, instance= obsequios)
+        contexto = {
+            'form': form
+        }
+        if form.is_valid() :
+            form.save()
+            return redirect('obsequios')
+    return render(request, 'crearObsequios.html', contexto)
