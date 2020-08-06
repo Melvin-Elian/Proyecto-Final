@@ -308,3 +308,19 @@ def editarLapices (request, id):
             form.save()
             return redirect('lapices')
     return render(request, 'crearLapices.html', contexto)
+def editarMochilas (request, id):
+    mochilas= Mochilas.objects.get(id=id)
+    if request.method == 'GET':
+        form= MochilasForm(instance= mochilas)
+        contexto = {
+            'form': form
+        }
+    else :
+        form= MochilasForm(request.POST, instance= mochilas)
+        contexto = {
+            'form': form
+        }
+        if form.is_valid() :
+            form.save()
+            return redirect('mochilas')
+    return render(request, 'crearMochilas.html', contexto)
