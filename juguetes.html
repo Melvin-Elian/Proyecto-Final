@@ -75,6 +75,7 @@
                     <th>Color</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Opcion</th>
                 </tr>
             </head>
             <tbody>
@@ -85,6 +86,7 @@
                         <td>{{juguetes.color}}</td>
                         <td>{{juguetes.price}}</td>
                         <td>{{juguetes.cant}}</td>
+                        <td> <a href=" {% url 'editarJuguetes' juguetes.id %} ">EDITAR</a> <a href="">ELIMINAR</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
