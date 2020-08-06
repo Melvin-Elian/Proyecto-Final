@@ -260,3 +260,19 @@ def editarObsequios (request, id):
             form.save()
             return redirect('obsequios')
     return render(request, 'crearObsequios.html', contexto)
+def editarPiñateria (request, id):
+    piñateria= Piñateria.objects.get(id=id)
+    if request.method == 'GET':
+        form= PiñateriaForm(instance= piñateria)
+        contexto = {
+            'form': form
+        }
+    else :
+        form= PiñateriaForm(request.POST, instance= piñateria)
+        contexto = {
+            'form': form
+        }
+        if form.is_valid() :
+            form.save()
+            return redirect('piñateria')
+    return render(request, 'crearPiñateria.html', contexto)
