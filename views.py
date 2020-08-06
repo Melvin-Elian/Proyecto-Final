@@ -286,6 +286,10 @@ def eliminarJuguetes (request, id):
     juguetes= Juguetes.objects.get(id=id)
     juguetes.delete()
     return render(request, 'juguetes.html', contexto)
+def eliminarObsequios (request, id):
+    obsequios= Obsequios.objects.get(id=id)
+    obsequios.delete()
+    return render(request, 'obsequios.html', contexto)
 #REPORTES
 def reporteCuadernos (request) :
     cuadernos = Cuadernos.objects.all()
